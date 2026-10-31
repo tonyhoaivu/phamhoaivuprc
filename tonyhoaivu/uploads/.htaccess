@@ -1,0 +1,13 @@
+# Disable PHP and script execution inside uploads directory
+<FilesMatch "\.(php|phtml|php3|php4|php5|php7|php8|phps|cgi|pl|exe|sh|py|jsp|asp|aspx)$">
+    Order Deny,Allow
+    Deny from all
+</FilesMatch>
+
+# Only allow safe media types
+<FilesMatch "\.(jpg|jpeg|png|gif|webp|svg|pdf|ico)$">
+    Order Allow,Deny
+    Allow from all
+</FilesMatch>
+
+Options -Indexes -ExecCGI

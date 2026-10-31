@@ -1,0 +1,6 @@
+{
+  "name": "TonyHoaiVu Blog & PHP CMS",
+  "description": "Website blog cá nhân TonyHoaiVu và hệ thống quản trị CMS độc lập viết bằng PHP + MySQL chuẩn kiến trúc tương tự WordPress.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,42 @@
+# TonyHoaiVu CMS - Apache .htaccess Rewrite Rules
+# URL rewriting for clean, SEO-friendly permalinks
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /tonyhoaivu/
+
+# Security: Disable directory browsing
+Options -Indexes
+
+# Security: Protect hidden files and folders
+RewriteRule ^\.(.*) - [F]
+
+# Block direct access to config and includes directories
+RewriteRule ^config/ - [F,L]
+RewriteRule ^includes/ - [F,L]
+
+# Clean Post URL: /post/slug-name -> post.php?slug=slug-name
+RewriteRule ^post/([a-zA-Z0-9_-]+)/?$ post.php?slug=$1 [L,QSA]
+
+# Clean Category URL: /category/slug-name -> category.php?slug=slug-name
+RewriteRule ^category/([a-zA-Z0-9_-]+)/?$ category.php?slug=$1 [L,QSA]
+
+# Clean Page URL: /page/slug-name -> page.php?slug=slug-name
+RewriteRule ^page/([a-zA-Z0-9_-]+)/?$ page.php?slug=$1 [L,QSA]
+
+# Clean Search URL: /search/?q=term -> search.php
+RewriteRule ^search/?$ search.php [L,QSA]
+
+# Pass all other files or directories that exist normally
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . index.php [L]
+</IfModule>
+
+# Security Headers
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set X-XSS-Protection "1; mode=block"
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
